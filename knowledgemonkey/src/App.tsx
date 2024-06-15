@@ -11,6 +11,8 @@ const App: React.FC = () => {
     y2: 5,
     xc: 2,
     yc: 2,
+    fractionalX: '0.0',
+    fractionalY: '0.0',
   });
 
   const handlePointsUpdate = (newPoints: any) => {

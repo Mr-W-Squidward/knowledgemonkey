@@ -37,6 +37,8 @@ const Quiz: React.FC<QuizProps> = ({ onPointsUpdate }) => {
     yc: 0,
     r1: 0,
     r2: 0,
+    fractionalX: '',
+    fractionalY: '',
   });
   const [options, setOptions] = useState<Option[]>([]);
   const [correctAnswer, setCorrectAnswer] = useState<Option>({ xc: '0', yc: '0' });
