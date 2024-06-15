@@ -28,7 +28,7 @@ interface QuizProps {
 
 const Quiz: React.FC<QuizProps> = ({ onPointsUpdate }) => {
   // State variables to store points, options, correct answer, explanation, messages, streak, and timer
-  const [points, setPoints] = useState<Partial<Point>>({});
+  const [points, setPoints] = useState<Point | {}>({});
   const [options, setOptions] = useState<Option[]>([]);
   const [correctAnswer, setCorrectAnswer] = useState<Option>({ xc: '0', yc: '0' });
   const [explanation, setExplanation] = useState<string | null>(null);
