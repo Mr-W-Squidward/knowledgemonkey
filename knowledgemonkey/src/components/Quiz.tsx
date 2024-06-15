@@ -28,7 +28,16 @@ interface QuizProps {
 
 const Quiz: React.FC<QuizProps> = ({ onPointsUpdate }) => {
   // State variables to store points, options, correct answer, explanation, messages, streak, and timer
-  const [points, setPoints] = useState<Point | {}>({});
+  const [points, setPoints] = useState<Point>({
+    x1: 0,
+    y1: 0,
+    x2: 0,
+    y2: 0,
+    xc: 0,
+    yc: 0,
+    r1: 0,
+    r2: 0,
+  });
   const [options, setOptions] = useState<Option[]>([]);
   const [correctAnswer, setCorrectAnswer] = useState<Option>({ xc: '0', yc: '0' });
   const [explanation, setExplanation] = useState<string | null>(null);
@@ -44,7 +53,7 @@ const Quiz: React.FC<QuizProps> = ({ onPointsUpdate }) => {
     const { xc, yc, explanationX, explanationY, fractionalX, fractionalY } = calculatePointC(x1, y1, x2, y2, r1, r2);
     
     // Create a new points object with all necessary data
-    const newPoints = { x1, y1, x2, y2, xc, yc, r1, r2, explanationX, explanationY, fractionalX, fractionalY };
+    const newPoints: Point = { x1, y1, x2, y2, xc, yc, r1, r2, explanationX, explanationY, fractionalX, fractionalY };
     setPoints(newPoints);
     // Call the onPointsUpdate callback with the new points
     onPointsUpdate(newPoints);
@@ -102,9 +111,9 @@ const Quiz: React.FC<QuizProps> = ({ onPointsUpdate }) => {
         `The correct coordinates for point C are (${correctAnswer.xc}, ${correctAnswer.yc}).
         Calculation steps:
         For x: 
-        ${points.explanationX}
+        ${points.explanationX || 'N/A'}
         For y: 
-        ${points.explanationY}`
+        ${points.explanationY || 'N/A'}`
       );
     }
   };
@@ -117,7 +126,7 @@ const Quiz: React.FC<QuizProps> = ({ onPointsUpdate }) => {
   };
 
   return (
-    // The structure of the page +  tailwind styling
+    // The structure of the page + tailwind styling
     <div className="p-4 bg-white shadow-md rounded-lg max-w-md mx-auto mt-8 text-center">
       <h1 className="text-2xl font-bold mb-4 text-primary">Division Point Quiz</h1>
       <div className="flex flex-col items-center mb-4">
