@@ -1,12 +1,15 @@
+// This function calculates the greatest common divisor of two numbers using the recursive algorithm we learned in class
 export function gcd(a: number, b: number): number {
   if (b === 0) return Math.abs(a);
   return gcd(b, a % b);
 }
 
+// Gets a random integer - Used for our fake options
 export function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Randomized point and ratio generation for each question
 export function generatePointsAndRatio() {
   const x1 = getRandomInt(-10, 10);
   const y1 = getRandomInt(-10, 10);
@@ -23,11 +26,13 @@ export function generatePointsAndRatio() {
   return { x1, y1, x2, y2, r1, r2 };
 }
 
+// Simplifying fractions before we display to the user using the GCD function
 function simplifyFraction(numerator: number, denominator: number) {
   const divisor = gcd(numerator, denominator);
   return [numerator / divisor, denominator / divisor];
 }
 
+// Calculating point C using the division point algorithm we learned, steps are also displayed to the user
 export function calculatePointC(x1: number, y1: number, x2: number, y2: number, r1: number, r2: number) {
   const numeratorX = r1 * x2 + r2 * x1;
   const denominatorX = r1 + r2;
@@ -40,8 +45,18 @@ export function calculatePointC(x1: number, y1: number, x2: number, y2: number, 
   const xc = simplifiedXNumerator / simplifiedXDenominator;
   const yc = simplifiedYNumerator / simplifiedYDenominator;
 
-  const explanationX = `${r1} * ${x2} + ${r2} * ${x1} = ${numeratorX}, divided by ${denominatorX} gives ${simplifiedXNumerator}/${simplifiedXDenominator}`;
-  const explanationY = `${r1} * ${y2} + ${r2} * ${y1} = ${numeratorY}, divided by ${denominatorY} gives ${simplifiedYNumerator}/${simplifiedYDenominator}`;
+  // Formatting the explanation on different lines with simplification steps
+  const explanationX = 
+  `(r1*x2) + (r2 * x1) = Xn\n` + `X = Xn/denominator\n` + `denominatorX = r1 + r2 = ${r1} + ${r2} = ${denominatorX}\n` +
+  `${r1} * ${x2} + ${r2} * ${x1} = ${numeratorX}\n` + `DIVIDED BY ${denominatorX}\n` +
+  `= ${numeratorX}/${denominatorX}\n` +
+  `= ${simplifiedXNumerator}/${simplifiedXDenominator}\n`;
+  
+const explanationY = 
+  `(r1*y2) + (r2 * y1) = Yn\n` + `Y = Yn/denominator\n` + `denominatorY = r1 + r2 = ${r1} + ${r2} = ${denominatorY}\n` +
+  `${r1} * ${y2} + ${r2} * ${y1} = ${numeratorY}\n` + `DIVIDED BY ${denominatorY}\n` +
+  `= ${numeratorY}/${denominatorY}\n` +
+  `= ${simplifiedYNumerator}/${simplifiedYDenominator}\n`;
 
   return { 
     xc, 
@@ -57,6 +72,7 @@ export function calculatePointC(x1: number, y1: number, x2: number, y2: number, 
   };
 }
 
+// Generating the fake options with our randomInt function/simplifying them
 export function generateFakeOptions(correctX: string, correctY: string) {
   const fakeOptions: { xc: string; yc: string; }[] = [];
   const [correctXNum, correctXDen] = correctX.split('/').map(Number);

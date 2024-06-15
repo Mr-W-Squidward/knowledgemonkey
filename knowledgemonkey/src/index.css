@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.fade-out {
-  animation: fadeOut 1s forwards;
+.text-primary {
+  color: #3557CD;
+}
+
+.bg-highlight {
+  background-color: #6C5B7B;
 }
 
 @keyframes fadeOut {
@@ -13,4 +17,8 @@
   to {
     opacity: 0;
   }
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
 }
