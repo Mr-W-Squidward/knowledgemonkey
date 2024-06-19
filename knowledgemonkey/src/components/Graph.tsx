@@ -3,8 +3,11 @@ import { Line } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js';
 import 'chart.js/auto';
 
+// Removes the unwanted '/1' if the last two characters are '/1'
+const formatAnswer = (answer: string) => {
+  return answer.endsWith('/1') ? answer.slice(0, -2) : answer;
+};
 
-// Renders a line chart using the react-chartjs-2 library
 interface GraphProps {
   points: {
     x1: number;
@@ -20,7 +23,6 @@ interface GraphProps {
 
 const Graph: React.FC<GraphProps> = ({ points }) => {
   const data = {
-    // Feeds the data from the points we created to then plot
     labels: ['A', 'C', 'B'],
     datasets: [
       {
@@ -41,7 +43,6 @@ const Graph: React.FC<GraphProps> = ({ points }) => {
   };
 
   const options: ChartOptions<'line'> = {
-    // Formats the chart with scales and labels
     scales: {
       x: {
         type: 'linear',
@@ -60,7 +61,7 @@ const Graph: React.FC<GraphProps> = ({ points }) => {
           label: function (context) {
             const label = context.dataset.data[context.dataIndex] as any;
             if (label.label === 'C') {
-              return `C: (${points.fractionalX}, ${points.fractionalY})`;
+              return `C: (${formatAnswer(points.fractionalX)}, ${formatAnswer(points.fractionalY)})`;
             } else {
               return `${label.label}: (${context.parsed.x}, ${context.parsed.y})`;
             }
