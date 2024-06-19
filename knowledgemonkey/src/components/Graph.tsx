@@ -21,6 +21,7 @@ interface GraphProps {
   };
 }
 
+// Component for rendering a graph with labeled points
 const Graph: React.FC<GraphProps> = ({ points }) => {
   const data = {
     labels: ['A', 'C', 'B'],
@@ -42,6 +43,7 @@ const Graph: React.FC<GraphProps> = ({ points }) => {
     ],
   };
 
+  // Options for the chart
   const options: ChartOptions<'line'> = {
     scales: {
       x: {
@@ -55,6 +57,7 @@ const Graph: React.FC<GraphProps> = ({ points }) => {
         max: 10,
       },
     },
+    // Customize tooltip labels
     plugins: {
       tooltip: {
         callbacks: {
@@ -70,7 +73,8 @@ const Graph: React.FC<GraphProps> = ({ points }) => {
       },
     },
   };
-
+  
+  // Render the Line chart
   return <Line data={data} options={options} />;
 };
 

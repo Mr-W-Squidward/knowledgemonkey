@@ -1,10 +1,10 @@
-// This function calculates the greatest common divisor of two numbers using the recursive algorithm we learned in class
+// Calculates the greatest common divisor of two numbers using recursion
 export function gcd(a: number, b: number): number {
   if (b === 0) return Math.abs(a);
   return gcd(b, a % b);
 }
 
-// Gets a random integer - Used for our fake options
+// Generates a random integer between min and max (inclusive)
 export function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -100,6 +100,5 @@ export function generateFakeOptions(correctX: string, correctY: string) {
       fakeOptions.push(fakeOption);
     }
   }
-
   return fakeOptions;
 }
